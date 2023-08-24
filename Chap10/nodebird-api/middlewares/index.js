@@ -19,7 +19,8 @@ exports.isLoggedIn = (req, res, next) => {
 
 exports.verifyToken = (req, res, next) => {
   try {
-    
+    res.locals.decoded = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+    return next()
   } catch (error) {
     if (error.name === 'TokenExpiredError') { // 유효 기간 초과
       return res.status(419).json({
