@@ -1,5 +1,5 @@
 import Sequelize, {
-    Model, CreationOptional, InferAttributes, InferCreationAttributes,
+    Model, CreationOptional, InferAttributes, InferCreationAttributes, BelongsToManyGetAssociationsMixin,
 } from 'sequelize'
 import Post from './post'
 
@@ -9,6 +9,8 @@ class Hashtag extends Model<InferAttributes<Hashtag>, InferCreationAttributes<Ha
     declare title: string
     declare createdAt: CreationOptional<Date>
     declare updatedAt: CreationOptional<Date>
+
+    declare getPosts: BelongsToManyGetAssociationsMixin<Post>
 
     static initiate(sequelize: Sequelize.Sequelize) {
         Hashtag.init({

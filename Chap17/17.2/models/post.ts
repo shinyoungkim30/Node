@@ -1,5 +1,5 @@
 import Sequelize, {
-    CreationOptional, InferAttributes, InferCreationAttributes, Model,
+    CreationOptional, InferAttributes, InferCreationAttributes, Model, BelongsToManyAddAssociationsMixin, ForeignKey,
 } from 'sequelize'
 import User from './user'
 import Hashtag from './hashtag'
@@ -10,6 +10,9 @@ class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
     declare img: string
     declare createdAt: CreationOptional<Date>
     declare updatedAt: CreationOptional<Date>
+
+    declare UserId: ForeignKey<User['id']>
+    declare addHashtags: BelongsToManyAddAssociationsMixin<Hashtag, number>
 
     static initiate(sequelize: Sequelize.Sequelize) {
         Post.init({

@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { ErrorRequestHandler } from 'express'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import path from 'path'
@@ -62,7 +62,7 @@ app.use((req, res, next) => {
     next(error)
 })
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     console.error(err);
     res.locals.message = err.message
     res.locals.error = process.env.NODE_ENV !== 'production' ? err : {}

@@ -1,5 +1,5 @@
 import Sequelize, {
-    CreationOptional, InferAttributes, InferCreationAttributes, Model,
+    CreationOptional, InferAttributes, InferCreationAttributes, Model, BelongsToManyAddAssociationMixin, NonAttribute,
 } from 'sequelize'
 import Post from './post'
 
@@ -13,6 +13,10 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare createdAt: CreationOptional<Date>
     declare updatedAt: CreationOptional<Date>
     declare deletedAt: CreationOptional<Date>
+
+    declare Followers?: NonAttribute<User[]>
+    declare Followings?: NonAttribute<User[]>
+    declare addFollowing: BelongsToManyAddAssociationMixin<User, number>
 
     static initiate(sequelize: Sequelize.Sequelize) {
         User.init({
