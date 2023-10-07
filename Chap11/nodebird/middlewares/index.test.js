@@ -7,7 +7,7 @@ describe('isLoggedIn', () => {
   };
   const next = jest.fn();
 
-  test('로그인되어 있으면 isLoggedIn이 next를 호출해야 함', () => {
+  test('로그인 되어있으면 isLoggedIn이 next를 호출해야 함', () => {
     const req = {
       isAuthenticated: jest.fn(() => true),
     };
@@ -15,7 +15,7 @@ describe('isLoggedIn', () => {
     expect(next).toBeCalledTimes(1);
   });
 
-  test('로그인되어 있지 않으면 isLoggedIn이 에러를 응답해야 함', () => {
+  test('로그인 되어있지 않으면 isLoggedIn이 에러를 응답해야 함', () => {
     const req = {
       isAuthenticated: jest.fn(() => false),
     };
@@ -31,16 +31,16 @@ describe('isNotLoggedIn', () => {
   };
   const next = jest.fn();
 
-  test('로그인되어 있으면 isNotLoggedIn이 에러를 응답해야 함', () => {
+  test('로그인 되어있으면 isNotLoggedIn이 에러를 응답해야 함', () => {
     const req = {
       isAuthenticated: jest.fn(() => true),
     };
     isNotLoggedIn(req, res, next);
     const message = encodeURIComponent('로그인한 상태입니다.');
-    expect(res.redirect).toBeCalledWith(`/?error=${message}`)
+    expect(res.redirect).toBeCalledWith(`/?error=${message}`);
   });
 
-  test('로그인되어 있지 않으면 isNotLoggedIn이 next를 호출해야 함', () => {
+  test('로그인 되어있지 않으면 isNotLoggedIn이 next를 호출해야 함', () => {
     const req = {
       isAuthenticated: jest.fn(() => false),
     };
